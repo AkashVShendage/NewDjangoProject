@@ -40,5 +40,8 @@ REM Run migrations
 python manage.py makemigrations
 python manage.py migrate
 
+REM Save packages in requirement.txt file
+python -m pip freeze > requirements.txt
+
 REM Run the server on the specified port
 python manage.py runserver 0.0.0.0:%PORT%
