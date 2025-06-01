@@ -8,8 +8,17 @@ REM Set default values if input is empty
 IF "%ENV_NAME%"=="" SET ENV_NAME=env
 IF "%PORT%"=="" SET PORT=8000
 
-REM Activate virtual environment
-CALL %ENV_NAME%\Scripts\activate
+if exist ".\%ENV_NAME%\" (
+    REM Activate virtual environment
+    CALL %ENV_NAME%\Scripts\activate
+
+) else (
+    ECHO Given environment not found proceeding for default '.\env\'...
+
+    CALL proj_env_creator.bat
+    CALL %ENV_NAME%\Scripts\activate
+    
+)
 
 REM Run the server on the specified port
 python manage.py runserver 0.0.0.0:%PORT%
